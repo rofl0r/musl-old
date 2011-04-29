@@ -20,7 +20,15 @@ OBJS = $(SRCS:.c=.o)
 LOBJS = $(OBJS:.o=.lo)
 GENH = include/bits/alltypes.h
 
-CFLAGS  = -Os -nostdinc -ffreestanding -std=c99 -D_XOPEN_SOURCE=700 -pipe
+CFLAGS = -nostdinc -std=c99 -D_XOPEN_SOURCE=700 -pipe
+
+# run DEBUG=1 make for a debug build
+ifndef DEBUG
+CFLAGS += -Os -ffreestanding
+else
+CFLAGS += -g -O0 
+endif
+
 LDFLAGS = -nostdlib -shared -fPIC -Wl,-e,_start -Wl,-Bsymbolic-functions
 INC     = -I./include -I./src/internal -I./arch/$(ARCH)
 PIC     = -fPIC -O3
