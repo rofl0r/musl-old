@@ -1,0 +1,7 @@
+*.o
+*.a
+arch/x86_64/bits/alltypes.h
+arch/i386/bits/alltypes.h
+config.mak
+include/bits
+tools/musl-gcc
