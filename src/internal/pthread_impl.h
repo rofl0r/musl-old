@@ -75,9 +75,14 @@ struct __timer {
 
 #include "pthread_arch.h"
 
-#define SIGCANCEL 32
-#define SIGSYSCALL 33
-#define SIGTIMER 34
+#define SIGTIMER 32
+#define SIGCANCEL 33
+#define SIGSYSCALL 34
+
+#define SIGPT_SET ((sigset_t *)(unsigned long [1+(sizeof(long)==4)]){ \
+	[sizeof(long)==4] = 3<<(32*(sizeof(long)>4)) })
+#define SIGTIMER_SET ((sigset_t *)(unsigned long [1+(sizeof(long)==4)]){ \
+	 0x80000000 })
 
 int __set_thread_area(void *);
 int __libc_sigaction(int, const struct sigaction *, struct sigaction *);
